@@ -1,7 +1,6 @@
 import random
 from kivy.core.window import Window
 from kivy.app import App
-from kivy.uix.behaviors import focus
 from kivy.uix.label import Label
 from kivy.uix.image import Image
 from kivy.uix.button import Button
@@ -11,7 +10,8 @@ from kivy.uix.textinput import TextInput
 Window.fullscreen = True
 elserandom = 1
 
-def sizer(define):
+
+def sizer(defin):
     deflist = defin.split()
     definsize = ""
     definsize_nontime = deflist[0]
@@ -24,6 +24,7 @@ def sizer(define):
     definsize += definsize_nontime
     return definsize
 
+
 def word():
     base = open('base.txt', 'r', encoding="utf-8")
     line = random.choice(base.readlines())
@@ -31,34 +32,39 @@ def word():
 
 findword, defin = word()
 
+
 def setword():
     global findword, defin
     findword, defin = word()
 
 localscore = 0
+
+
 class Menu(App):
     global localscore
+
     localscore = 0
+
     def build(self):
         layout = FloatLayout(size=(300, 300))
 
-        layout.add_widget(Image(source="black.png",
-                    size_hint=(4, 4),
-                    pos_hint={'center_x':0.5, 'center_y':0.5}))
+        layout.add_widget(Image(source="black.png", size_hint=(4, 4),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.5}))
 
-        layout.add_widget(Image(source='fon.gif', anim_delay= 0.1, mipmap= True, allow_stretch= True,
-                    size_hint=(1, 1),
-                    pos_hint={'center_x':0.5, 'center_y':0.5}))
+        layout.add_widget(Image(source='fon.gif', anim_delay=0.1, mipmap=True,
+                                allow_stretch=True, size_hint=(1, 1),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.5}))
 
-        layout.add_widget(Image(source='score.gif', anim_delay= 0.1, mipmap= True, allow_stretch= True,
-                    size_hint=(0.2, 0.2),
-                    pos_hint={'center_x':0.9, 'center_y':0.1}))
+        layout.add_widget(Image(source='score.gif', anim_delay=0.1,
+                                mipmap=True,
+                                allow_stretch=True, size_hint=(0.2, 0.2),
+                                pos_hint={'center_x': 0.9, 'center_y': 0.1}))
 
         score = open('score.txt', 'r', encoding="utf-8")
 
         layout.add_widget(Label(text="Счет: " + score.readline(),
-                      size_hint=(0.5, 0.5),
-                      pos_hint={'center_x': 0.9, 'center_y': 0.185}))
+                                size_hint=(0.5, 0.5),
+                                pos_hint={'center_x': 0.9, 'center_y': 0.185}))
 
         score.close()
 
@@ -82,9 +88,8 @@ class Menu(App):
         button.bind(on_press=self.on_press_button3)
 
         layout.add_widget(button)
- 
         return layout
- 
+
     def on_press_button(self, instance):
         Menu().stop()
         Game().run()
@@ -96,19 +101,20 @@ class Menu(App):
     def on_press_button3(self, instance):
         Menu().stop()
         Lise().run()
-    
+
+
 class Rule(App):
     def build(self):
         layout = FloatLayout(size=(300, 300))
 
         layout.add_widget(Image(source="black.png",
-                    size_hint=(4, 4),
-                    pos_hint={'center_x':0.5, 'center_y':0.5}))
+                                size_hint=(4, 4),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.5}))
 
-        layout.add_widget(Label(text="Чувак, у тебя в игре есть вопрос и поле для ввода, ты серьезно спрашиваешь как в это играть?",
-                      size_hint=(0.2, 1),
-                      pos_hint={'center_x': 0.5, 'center_y': 0.7}))
-        
+        layout.add_widget(Label(text="Ну есть определение, а вам нужно угадать слово с одной попытки.\
+                                      \nА кто говорил что будет легко?",
+                                size_hint=(0.2, 1),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.7}))
 
         button = Button(text='Меню',
                         size_hint=(0.3, 0.1),
@@ -116,7 +122,6 @@ class Rule(App):
         button.bind(on_press=self.on_press_button)
 
         layout.add_widget(button)
-
         return layout
 
     def on_press_button(self, instance):
@@ -129,16 +134,16 @@ class Lise(App):
         layout = FloatLayout(size=(300, 300))
 
         layout.add_widget(Image(source="black.png",
-                    size_hint=(4, 4),
-                    pos_hint={'center_x':0.5, 'center_y':0.5}))
+                                size_hint=(4, 4),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.5}))
 
         layout.add_widget(Label(text="Написана на коленке verdenkaa\
                                     \n\nЗа идею была взята настольная игра виселица\
                                     \n\nИ да, мне не лень было прописывать красивый фон,просто стиль такой. Мне нравится\
                                     \n\nЧто-бы выйти из это чуда, нажмите Esc.\
-                                    \n\n Ну или можете использовать Alt+F4 ¯ \ _ (ツ) _ / ¯",
-                      size_hint=(0.2, 1),
-                      pos_hint={'center_x': 0.5, 'center_y': 0.7}))
+                                    \n\n Ну или можете использовать Alt+F4",
+                                size_hint=(0.2, 1),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.7}))
 
         button = Button(text='Меню',
                         size_hint=(0.3, 0.1),
@@ -146,7 +151,6 @@ class Lise(App):
         button.bind(on_press=self.on_press_button)
 
         layout.add_widget(button)
-
         return layout
 
     def on_press_button(self, instance):
@@ -156,43 +160,37 @@ class Lise(App):
 
 class Game(App):
     global findword, defin, localscore
-    
-
-    print(findword)
-    print(defin)
-
 
     def build(self):
         global defin
 
         if len(defin) > 60:
             defin = sizer(defin)
-        
+
         layout = FloatLayout(size=(300, 300))
 
         layout.add_widget(Image(source="black.png",
-                    size_hint=(4, 4),
-                    pos_hint={'center_x':0.5, 'center_y':0.5}))
+                                size_hint=(4, 4),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.5}))
 
-        layout.add_widget(Image(source='fon.gif', anim_delay= 0.1, mipmap= True, allow_stretch= True,
-                    size_hint=(1, 1),
-                    pos_hint={'center_x':0.2, 'center_y':0.5}))
+        layout.add_widget(Image(source='fon.gif', anim_delay=0.1, mipmap=True,
+                                allow_stretch=True, size_hint=(1, 1),
+                                pos_hint={'center_x': 0.2, 'center_y': 0.5}))
 
         layout.add_widget(Image(source='black.png',
-                    size_hint=(1, 1),
-                    pos_hint={'center_x':0.8, 'center_y':0.5}))
+                                size_hint=(1, 1),
+                                pos_hint={'center_x': 0.8, 'center_y': 0.5}))
 
         layout.add_widget(Label(text=defin, halign='center',
-                      size_hint=(0.5, 0.5),
-                      pos_hint={'center_x': 0.6, 'center_y': 0.8}))
+                                size_hint=(0.5, 0.5),
+                                pos_hint={'center_x': 0.6, 'center_y': 0.8}))
 
         textinput = TextInput(text='', multiline=False, size_hint=(0.5, 0.05),
-                      pos_hint={'center_x': 0.6, 'center_y': 0.7})
+                              pos_hint={'center_x': 0.6, 'center_y': 0.7})
 
         def on_focus(value):
             global localscore
             if findword.lower() == value.text.lower():
-                print("ok")
                 localscore += 1
                 score = open('score.txt', 'r', encoding="utf-8")
                 score2 = int(score.readline())
@@ -201,7 +199,6 @@ class Game(App):
                     scorew = open('score.txt', 'w+', encoding="utf-8")
                     scorew.write(str(localscore))
                     scorew.close()
-                print(findword)
                 Game().stop()
                 Win().run()
             else:
@@ -218,20 +215,20 @@ class Win(App):
         global elserandom
         layout = FloatLayout(size=(300, 300))
         layout.add_widget(Image(source="black.png",
-                    size_hint=(4, 4),
-                    pos_hint={'center_x':0.5, 'center_y':0.5}))
+                                size_hint=(4, 4),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.5}))
 
         layout.add_widget(Label(text="Правильно!",
-                      size_hint=(0.5, 0.5),
-                      pos_hint={'center_x': 0.5, 'center_y': 0.8}))
+                                size_hint=(0.5, 0.5),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.8}))
 
         x = "win" + str(elserandom) + ".gif"
         elserandom += 1
         if elserandom == 11:
             elserandom = 1
-        layout.add_widget(Image(source=x, anim_delay= 0.1, mipmap= True, allow_stretch= True,
-                    size_hint=(0.5, 0.5),
-                    pos_hint={'center_x':0.5, 'center_y':0.5}))
+        layout.add_widget(Image(source=x, anim_delay=0.1, mipmap=True,
+                                allow_stretch=True, size_hint=(0.5, 0.5),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.5}))
 
         button = Button(text='Продолжить',
                         size_hint=(.5, .1),
@@ -240,7 +237,6 @@ class Win(App):
         button.bind(on_press=self.on_press_button)
 
         layout.add_widget(button)
- 
         return layout
 
     def on_press_button(self, instance):
@@ -254,38 +250,31 @@ class Loose(App):
         global elserandom
         layout = FloatLayout(size=(300, 300))
         layout.add_widget(Image(source="black.png",
-                    size_hint=(4, 4),
-                    pos_hint={'center_x':0.5, 'center_y':0.5}))
+                                size_hint=(4, 4),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.5}))
 
         layout.add_widget(Label(text="На этом все...",
-                      size_hint=(0.5, 0.5),
-                      pos_hint={'center_x': 0.5, 'center_y': 0.8}))
+                                size_hint=(0.5, 0.5),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.8}))
 
         x = "loose" + str(elserandom) + ".gif"
         elserandom += 1
         if elserandom == 11:
             elserandom = 1
-        layout.add_widget(Image(source=x, anim_delay= 0.1, mipmap= True, allow_stretch= True,
-                    size_hint=(0.5, 0.5),
-                    pos_hint={'center_x':0.5, 'center_y':0.5}))
+        layout.add_widget(Image(source=x, anim_delay=0.1, mipmap=True,
+                                allow_stretch=True, size_hint=(0.5, 0.5),
+                                pos_hint={'center_x': 0.5, 'center_y': 0.5}))
 
         button = Button(text='Меню',
                         size_hint=(.5, .1),
                         pos_hint={'center_x': 0.5, 'center_y': 0.2})
 
         button.bind(on_press=self.on_press_button)
-
-
         layout.add_widget(button)
- 
         return layout
 
     def on_press_button(self, instance):
         Loose().stop()
         setword()
         Menu().run()
-
-
-
-
 Menu().run()
